@@ -22,7 +22,7 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 
 bootJar {
-    baseName = 'resources-world-java'
+    baseName = 'resources-microservice'
     mainClassName = 'resources.Application'
     version =  '0.1.0'
 }
