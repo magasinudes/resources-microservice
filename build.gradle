@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '2.1.0.RELEASE'
+        springBootVersion = '2.1.5.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -13,13 +13,18 @@ buildscript {
 plugins {
     id 'java'
     id 'org.sonarqube' version '2.7'
-    id 'org.springframework.boot' version '2.0.5.RELEASE'
+    id 'org.springframework.boot' version '2.1.5.RELEASE'
     id 'io.spring.dependency-management' version '1.0.7.RELEASE' 
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.magasinudes'
+version = '0.1.0'
+sourceCompatibility = '1.8'
 
 bootJar {
     baseName = 'resources-microservice'
@@ -32,21 +37,12 @@ repositories {
 }   
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-dependencies:2.0.5.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-dependencies:2.1.5.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-
+    runtimeOnly 'org.postgresql:postgresql'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-    components {
-        withModule('org.springframework:spring-beans') {
-            allVariants {
-                withDependencyConstraints {
-                    // Need to patch constraints because snakeyaml is an optional dependency
-                    it.findAll { it.name == 'snakeyaml' }.each { it.version { strictly '1.19' } }
-                }
-            }
-        }
-    }
 }
 
 test {
