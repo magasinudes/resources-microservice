@@ -24,11 +24,9 @@ public class Outlet extends AuditModel {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @NotBlank
     @Column(name= "open_time", nullable = false)
     private LocalTime openTime;
 
-    @NotBlank
     @Column(name= "close_time", nullable = false)
     private LocalTime closeTime;
 
