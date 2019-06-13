@@ -20,7 +20,7 @@ public class ResourceCategoryType extends AuditModel {
 
     @NotBlank
     @Size(min = 3, max = 32)
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
     // ------------
