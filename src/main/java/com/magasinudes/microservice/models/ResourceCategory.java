@@ -5,6 +5,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "resource_categories", schema = "public")
@@ -32,14 +33,17 @@ public class ResourceCategory extends AuditModel {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "outlet_id", nullable = false)
+    @JsonIgnore
     private Outlet outlet;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
+    @JsonIgnore
     private ResourceCategory parent;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "resource_category_type_id", nullable = false)
+    @JsonIgnore
     private ResourceCategoryType type;
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true, targetEntity = ResourceCategory.class)

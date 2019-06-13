@@ -35,7 +35,7 @@ public class OutletsController {
     @PutMapping("/outlets/{outletId}")
     public Long update(@PathVariable Long outletId, @Valid @RequestBody Outlet data) {
         return outletRepository.findById(outletId).map(outlet -> {
-            outlet.setName(data.getName());
+            if (data.getName() != null) { outlet.setName(data.getName()); }
             if (data.getOpenTime() != null) { outlet.setOpenTime(data.getOpenTime()); }
             if (data.getCloseTime() != null) { outlet.setCloseTime(data.getCloseTime()); }
             return outletRepository.save(outlet).getId();
