@@ -52,9 +52,6 @@ public class ResourceCategory extends AuditModel {
     @OneToMany(mappedBy = "resourceCategory", orphanRemoval = true, targetEntity = ResourceCategoryStatus.class)
     private Set<ResourceCategoryStatus> statuses = new HashSet<>();
 
-    @OneToMany(mappedBy = "resourceCategory", orphanRemoval = true, targetEntity = CostType.class)
-    private Set<CostType> costTypes = new HashSet<>();
-
     @OneToMany(mappedBy = "category", orphanRemoval = true, targetEntity = Resource.class)
     private Set<Resource> resources = new HashSet<>();
 
@@ -122,15 +119,6 @@ public class ResourceCategory extends AuditModel {
     public void addStatus(ResourceCategoryStatus status) {
         this.statuses.add(status);
         status.setResourceCategory(this);
-    }
-
-    public Set<CostType> getCostTypes() {
-        return costTypes;
-    }
-
-    public void addCostType(CostType costType) {
-        this.costTypes.add(costType);
-        costType.setResourceCategory(this);
     }
 
     public Set<Resource> getResources() {

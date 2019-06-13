@@ -30,10 +30,6 @@ public class CostType extends AuditModel {
     // Associations
     // ------------
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "resource_category_id", nullable = false)
-    private ResourceCategory resourceCategory;
-
     @OneToMany(mappedBy = "costType", targetEntity = Resource.class)
     private Set<Resource> resources = new HashSet<>();
 
@@ -59,14 +55,6 @@ public class CostType extends AuditModel {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public ResourceCategory getResourceCategory() {
-        return resourceCategory;
-    }
-
-    public void setResourceCategory(ResourceCategory category) {
-        this.resourceCategory = category;
     }
 
     public Set<Resource> getResources() {
