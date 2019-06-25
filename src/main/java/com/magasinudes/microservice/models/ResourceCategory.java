@@ -55,7 +55,7 @@ public class ResourceCategory extends AuditModel {
     @JsonIgnore
     private Set<ResourceCategoryStatus> statuses = new HashSet<>();
 
-    @OneToMany(mappedBy = "category", orphanRemoval = true, targetEntity = Resource.class)
+    @OneToMany(mappedBy = "resourceCategory", orphanRemoval = true, targetEntity = Resource.class)
     @JsonIgnore
     private Set<Resource> resources = new HashSet<>();
 

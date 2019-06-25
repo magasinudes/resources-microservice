@@ -36,17 +36,17 @@ public class Resource extends AuditModel {
     // Associations
     // ------------
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "resource_category_id", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private ResourceCategory category;
+    private ResourceCategory resourceCategory;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "resource_category_status_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private ResourceCategoryStatus status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "cost_type_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private CostType costType;
@@ -102,11 +102,11 @@ public class Resource extends AuditModel {
     }
 
     public ResourceCategory getCategory() {
-        return category;
+        return resourceCategory;
     }
 
     public void setCategory(ResourceCategory category) {
-        this.category = category;
+        this.resourceCategory = category;
     }
 
     public ResourceCategoryStatus getStatus() {
