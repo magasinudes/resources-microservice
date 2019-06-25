@@ -1,5 +1,7 @@
 package com.magasinudes.microservice.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -36,14 +38,17 @@ public class Resource extends AuditModel {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "resource_category_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private ResourceCategory category;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "resource_category_status_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private ResourceCategoryStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cost_type_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private CostType costType;
 
     // TODO: OneToMany associations for reservations, orders and borrows.

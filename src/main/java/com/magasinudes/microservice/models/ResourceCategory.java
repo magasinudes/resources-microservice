@@ -6,6 +6,7 @@ import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "resource_categories", schema = "public")
@@ -33,26 +34,29 @@ public class ResourceCategory extends AuditModel {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "outlet_id", nullable = false)
-    @JsonIgnore
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Outlet outlet;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
-    @JsonIgnore
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private ResourceCategory parent;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "resource_category_type_id", nullable = false)
-    @JsonIgnore
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private ResourceCategoryType type;
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true, targetEntity = ResourceCategory.class)
+    @JsonIgnore
     private Set<ResourceCategory> children = new HashSet<>();
 
     @OneToMany(mappedBy = "resourceCategory", orphanRemoval = true, targetEntity = ResourceCategoryStatus.class)
+    @JsonIgnore
     private Set<ResourceCategoryStatus> statuses = new HashSet<>();
 
     @OneToMany(mappedBy = "category", orphanRemoval = true, targetEntity = Resource.class)
+    @JsonIgnore
     private Set<Resource> resources = new HashSet<>();
 
     // ------------
@@ -112,6 +116,11 @@ public class ResourceCategory extends AuditModel {
         child.setParent(this);
     }
 
+    public void removeChildCategory(ResourceCategory child) {
+        this.children.remove(child);
+        child.setParent(null);
+    }
+
     public Set<ResourceCategoryStatus> getStatuses() {
         return statuses;
     }
@@ -128,5 +137,10 @@ public class ResourceCategory extends AuditModel {
     public void addResource(Resource resource) {
         this.resources.add(resource);
         resource.setCategory(this);
+    }
+
+    public void removeResource(Resource resource) {
+        this.resources.remove(resource);
+        resource.setCategory(null);
     }
 }

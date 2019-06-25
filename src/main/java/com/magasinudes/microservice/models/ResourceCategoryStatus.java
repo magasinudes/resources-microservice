@@ -1,5 +1,8 @@
 package com.magasinudes.microservice.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -32,9 +35,11 @@ public class ResourceCategoryStatus extends AuditModel {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "resource_category_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private ResourceCategory resourceCategory;
 
     @OneToMany(mappedBy = "status", targetEntity = Resource.class)
+    @JsonIgnore
     private Set<Resource> resources = new HashSet<>();
 
     // ------------
@@ -76,5 +81,10 @@ public class ResourceCategoryStatus extends AuditModel {
     public void addResource(Resource resource) {
         this.resources.add(resource);
         resource.setStatus(this);
+    }
+
+    public void removeResource(Resource resource) {
+        this.resources.remove(resource);
+        resource.setStatus(null);
     }
 }

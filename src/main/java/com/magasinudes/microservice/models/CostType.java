@@ -1,5 +1,7 @@
 package com.magasinudes.microservice.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -31,6 +33,7 @@ public class CostType extends AuditModel {
     // ------------
 
     @OneToMany(mappedBy = "costType", targetEntity = Resource.class)
+    @JsonIgnore
     private Set<Resource> resources = new HashSet<>();
 
     // ------------

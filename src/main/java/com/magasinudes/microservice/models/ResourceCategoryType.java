@@ -1,5 +1,7 @@
 package com.magasinudes.microservice.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -28,6 +30,7 @@ public class ResourceCategoryType extends AuditModel {
     // ------------
 
     @OneToMany(mappedBy = "type", targetEntity = ResourceCategory.class)
+    @JsonIgnore
     private Set<ResourceCategory> categories = new HashSet<>();
 
     // ------------
