@@ -1,6 +1,7 @@
 package com.magasinudes.microservice.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.context.annotation.Bean;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

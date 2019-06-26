@@ -5,6 +5,7 @@ import com.magasinudes.microservice.models.Resource;
 import com.magasinudes.microservice.repositories.ResourceCategoryRepository;
 import com.magasinudes.microservice.repositories.ResourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;

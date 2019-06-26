@@ -1,6 +1,7 @@
 package com.magasinudes.microservice.repositories;
 
 import com.magasinudes.microservice.models.Resource;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

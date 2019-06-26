@@ -23,13 +23,13 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 group = 'com.magasinudes'
-version = '0.1.0'
+version = '0.1.1'
 sourceCompatibility = '1.8'
 
 bootJar {
     baseName = 'resources-microservice'
     mainClassName = 'resources.Application'
-    version =  '0.1.0'
+    version =  '0.1.1'
 }
 
 repositories {
@@ -41,6 +41,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-amqp'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
     runtimeOnly 'org.postgresql:postgresql'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
